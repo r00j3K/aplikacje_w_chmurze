@@ -1,0 +1,8 @@
+FROM ubuntu:latest 
+LABEL org.opencontainers.image.authors="Rojek s97719@pollub.edu.pl" 
+RUN apt-get update && apt-get install -y apache2 \
+&& rm -rf /var/cache/apt 
+RUN sed -i 's/80/8080/g' /etc/apache2/ports.conf
+COPY index.html  /var/www/html/
+CMD ["apache2ctl", "-D", "FOREGROUND"]
+EXPOSE 8080
